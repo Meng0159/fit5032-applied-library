@@ -1,20 +1,24 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+// eslint-disable-next-line no-unused-vars
+import welcomeSection from './components/welcomeSection.vue'
+// eslint-disable-next-line no-unused-vars
 import TheWelcome from './components/TheWelcome.vue'
+import JSON from './components/JSON.vue'
 </script>
 
 <template>
-  <header>
+  <JSON></JSON>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <welcomeSection msg="You did it!" username="Eloi" />
     </div>
   </header>
 
   <main>
-    <TheWelcome />
-  </main>
+    <JSON />
+  </main> -->
 </template>
 
 <style scoped>
