@@ -109,7 +109,7 @@
       <!-- TODO: CODE TO TOGGLE MESSAGE VISIBILITY HERE. Hint: Use the v-if directive. -->
       <button @click="showMessage = !showMessage">Toggle Message</button>
       <p v-if="showMessage" class="message success">✨ You're a Vue superstar! ✨</p>
-      <p>Click the button to see a message.</p>
+      <p v-else class="message">>Click the button to see a message.</p>
     </section>
 
     <section class="lab-section">
