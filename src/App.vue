@@ -1,10 +1,7 @@
 <script setup>
-// eslint-disable-next-line no-unused-vars
-import welcomeSection from './components/welcomeSection.vue'
-// eslint-disable-next-line no-unused-vars
-import TheWelcome from './components/TheWelcome.vue'
 // import JSON from './components/JSON.vue'
-import Form from './components/Form.vue'
+// import RegistrationForm from './components/LibraryRegistrationForm.vue'
+import BHeader from './components/BHeader.vue'
 </script>
 
 <template>
@@ -15,16 +12,19 @@ import Form from './components/Form.vue'
     <div class="wrapper">
       <welcomeSection msg="You did it!" username="Eloi" />
     </div>
+  </header>-->
+  <header>
+    <BHeader />
   </header>
 
   <main>
-    <JSON />
-  </main> -->
-  <Form />
+    <!-- <RegistrationForm /> -->
+    <router-view></router-view>
+  </main>
 </template>
 
 <style scoped>
-header {
+/* header {
   line-height: 1.5;
 }
 
@@ -49,5 +49,5 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
-}
+} */
 </style>
