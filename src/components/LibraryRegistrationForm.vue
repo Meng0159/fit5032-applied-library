@@ -90,6 +90,7 @@ const validateReason = () => {
     message.value = 'Reason must be at least 5 characters long.'
   } else {
     if (formData.value.reason.toLowerCase().includes('friend')) {
+      console.log('keyword friend')
       message.value = 'Great to have a friend'
     } else {
       message.value = ''
@@ -174,7 +175,7 @@ const validateReason = () => {
             </div>
           </div>
           <div class="mb-3">
-            <label for="reason" class="form-label">Suburb</label>
+            <label for="suburb" class="form-label">Suburb</label>
             <input type="text" class="form-control" id="suburb" v-bind:value="formData.suburb" />
           </div>
 
