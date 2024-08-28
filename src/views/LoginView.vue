@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Login</h1>
+    <a href="/"> <button type="backHome">Back to Home Page</button></a>
     <form @submit.prevent="login">
       <div>
         <label for="username">Username:</label>

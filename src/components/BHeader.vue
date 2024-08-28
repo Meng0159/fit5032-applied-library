@@ -27,10 +27,22 @@
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="!checkIsLogin" to="/login" class="nav-link" active-class="active"
+          <router-link
+            v-if="!checkIsLogin"
+            to="/login"
+            class="nav-link"
+            active-class="active"
+            v-model="checkIsLogin"
             >Login</router-link
           >
-          <router-link v-else to="/" class="nav-link" active-class="active" @click="Logout"
+
+          <router-link
+            v-else
+            to="/"
+            class="nav-link"
+            active-class="active"
+            @click="logout"
+            v-model="checkIsLogin"
             >Logout</router-link
           >
         </li>
@@ -45,7 +57,7 @@ import { ref } from 'vue'
 const checkIsLogin = ref(localStorage.getItem('userState') === 'true' || false)
 console.log(checkIsLogin.value)
 
-const Logout = () => {
+const logout = () => {
   localStorage.removeItem('userState')
   checkIsLogin.value = false
   console.log(checkIsLogin.value)
