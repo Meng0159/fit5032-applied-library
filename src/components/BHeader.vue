@@ -46,6 +46,16 @@
             >Logout</router-link
           >
         </li>
+        <li class="nav-item">
+          <router-link to="/Firelogin" class="nav-link" active-class="active"
+            >Firebase Login</router-link
+          >
+        </li>
+        <li class="nav-item">
+          <router-link to="/FireRegister" class="nav-link" active-class="active"
+            >Firebase Register</router-link
+          >
+        </li>
       </ul>
     </header>
   </div>
@@ -55,12 +65,12 @@
 import { ref } from 'vue'
 
 const checkIsLogin = ref(localStorage.getItem('userState') === 'true' || false)
-console.log(checkIsLogin.value)
+// console.log(checkIsLogin.value)
 
 const logout = () => {
   localStorage.removeItem('userState')
   checkIsLogin.value = false
-  console.log(checkIsLogin.value)
+  // console.log(checkIsLogin.value)
 }
 </script>
 

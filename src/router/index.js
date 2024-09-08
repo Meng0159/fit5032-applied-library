@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 import AccessDenied from '../components/AccessDeniedPage.vue'
+import FirebaseSigninView from '../views/FirebaseSigninView.vue'
+import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
 
 function isAuthenticated() {
   const currentUser = JSON.parse(localStorage.getItem('userState') === 'true' || false)
@@ -22,6 +24,16 @@ function userAuthenticated(to, from, next) {
 }
 
 const routes = [
+  {
+    path: '/FireLogin',
+    name: 'FireLogin',
+    component: FirebaseSigninView
+  },
+  {
+    path: '/FireRegister',
+    name: 'FireRegister',
+    component: FirebaseRegisterView
+  },
   {
     path: '/',
     name: 'Home',
