@@ -26,7 +26,8 @@
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
-        <li class="nav-item">
+        <!-- login to local storage -->
+        <!-- <li class="nav-item">
           <router-link
             v-if="!checkIsLogin"
             to="/login"
@@ -45,14 +46,19 @@
             v-model="checkIsLogin"
             >Logout</router-link
           >
-        </li>
+        </li> -->
         <li class="nav-item">
-          <router-link to="/Firelogin" class="nav-link" active-class="active"
+          <router-link v-if="!checkIsLogin" to="/Firelogin" class="nav-link" active-class="active"
             >Firebase Login</router-link
           >
+          <a href="#" v-else class="nav-link" @click="logout">Logout</a>
         </li>
         <li class="nav-item">
-          <router-link to="/FireRegister" class="nav-link" active-class="active"
+          <router-link
+            v-if="!checkIsLogin"
+            to="/FireRegister"
+            class="nav-link"
+            active-class="active"
             >Firebase Register</router-link
           >
         </li>
@@ -63,14 +69,21 @@
 
 <script setup>
 import { ref } from 'vue'
+import { defineEmits } from 'vue'
+import { useRouter } from 'vue-router'
 
-const checkIsLogin = ref(localStorage.getItem('userState') === 'true' || false)
+const checkIsLogin = ref(localStorage.getItem('userLoginState') === 'true' || false)
 // console.log(checkIsLogin.value)
 
+const emit = defineEmits(['authenticated'])
+const router = useRouter()
 const logout = () => {
-  localStorage.removeItem('userState')
+  console.log('Logging out')
+  localStorage.removeItem('userLoginState')
   checkIsLogin.value = false
   // console.log(checkIsLogin.value)
+  emit('authenticated', false)
+  router.push('/')
 }
 </script>
 

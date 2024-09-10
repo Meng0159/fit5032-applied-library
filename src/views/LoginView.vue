@@ -63,8 +63,8 @@ const handleSubmit = () => {
   if (!usernameError.value && !passwordError.value) {
     alert('Form submitted successfully')
     isLogin.value = true
-    localStorage.setItem('userState', JSON.stringify(isLogin.value))
-    console.log(localStorage.getItem('userState'))
+    localStorage.setItem('userLoginState', JSON.stringify(isLogin.value))
+    console.log(localStorage.getItem('userLoginState'))
     router.push('/')
   } else {
     router.push('/accessDeniedPage')

@@ -37,6 +37,7 @@
 <script setup>
 import { ref } from 'vue'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getFirestore, doc, setDoc } from 'firebase/firestore'
 import { useRouter } from 'vue-router'
 
 const email = ref('')
@@ -45,17 +46,24 @@ const confirmPassword = ref('')
 const role = ref('')
 const router = useRouter()
 const auth = getAuth()
+const db = getFirestore()
 
-const register = () => {
-  createUserWithEmailAndPassword(auth, email.value, password.value)
-    // eslint-disable-next-line no-unused-vars
-    .then((data) => {
-      console.log('Firebase Register Successful!')
-      router.push('/FireLogin')
+const register = async () => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value)
+    const user = userCredential.user
+
+    // Store user role in Firestore
+    await setDoc(doc(db, 'users', user.uid), {
+      email: email.value,
+      role: role.value
     })
-    .catch((error) => {
-      console.log(error.code)
-    })
+
+    console.log('Firebase Register Successful!')
+    router.push('/FireLogin')
+  } catch (error) {
+    console.log(error.code)
+  }
 }
 
 const errors = ref({

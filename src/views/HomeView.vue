@@ -4,16 +4,22 @@
   </header>
   <Toast />
   <div v-if="isAuthenticated == true">
-    <Welcome />
-    <button type="button" class="btn btn-primary" @click="showRole('Welcome Back!')">
-      Show Role
-    </button>
+    <div class="welcome-section">
+      <h1>Welcome to the Library</h1>
+      <Welcome />
+    </div>
+
+    <div class="text-center">
+      <button @click="fetchAndShowRole">Refresh Role</button>
+      <p v-if="role">Your role is: {{ role }}</p>
+      <p v-if="error" class="error">{{ error }}</p>
+    </div>
     <LibraryRegistrationForm />
   </div>
   <!-- If user is not authenticated, then we force them to see the LoginView -->
   <!-- Note the use of @authenticated to handle child -> parent communication between LoginView nad App.vue components. -->
   <div v-else>
-    <LoginView @authenticated="handleAuthentication" />
+    <FirebaseSigninView @authenticated="handleAuthentication" />
   </div>
 </template>
 
@@ -21,14 +27,10 @@
 import Welcome from '@/components/Welcome.vue'
 import LibraryRegistrationForm from '@/components/LibraryForm.vue'
 import BHeader from '@/components/BHeader.vue'
-
-import LoginView from './LoginView.vue'
+import FirebaseSigninView from './FirebaseSigninView.vue'
 import { ref, onMounted } from 'vue'
 import { getAuth } from 'firebase/auth'
-import { getFirestore, getDoc, doc } from 'firebase/firestore'
-import { useToast } from 'primevue/usetoast'
 
-const toast = useToast()
 const role = ref(null)
 const error = ref(null)
 
@@ -43,26 +45,13 @@ const fetchAndShowRole = async () => {
   }
 
   try {
-    const db = getFirestore()
-    const userDoc = await getDoc(doc(db, 'users', user.uid))
-
-    if (userDoc.exists()) {
-      const userData = userDoc.data()
-      role.value = userData.role
-
-      toast.add({
-        severity: 'info',
-        summary: `Role: ${role.value}`,
-        detail: 'This is your current role in the system.',
-        life: 3000
-      })
-    } else {
-      error.value = 'User document not found'
-      console.log(error.value)
-    }
-  } catch (err) {
-    error.value = `Error fetching role: ${err.message}`
-    console.error(error.value)
+    const email = user.email
+    const isAdmin = email.includes('admin')
+    console.log(`Is admin: ${isAdmin}`)
+    role.value = isAdmin ? 'admin' : 'user'
+  } catch (e) {
+    error.value = e.message
+    console.error(e)
   }
 }
 
@@ -82,5 +71,9 @@ const handleAuthentication = (value) => {
 </script>
 
 <style scoped>
-/* Add your custom styles here */
+.welcome-section {
+  margin: 10px;
+  padding: 10px;
+  padding-bottom: 40px;
+}
 </style>
