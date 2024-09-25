@@ -5,6 +5,8 @@ import LoginView from '../views/LoginView.vue'
 import AccessDenied from '../components/AccessDeniedPage.vue'
 import FirebaseSigninView from '../views/FirebaseSigninView.vue'
 import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
+import AddBookView from '@/views/AddBookView.vue'
+import GetBookCountView from '@/views/GetBookCountView.vue'
 
 function isAuthenticated() {
   const currentUser = JSON.parse(localStorage.getItem('userState') === 'true' || false)
@@ -54,6 +56,16 @@ const routes = [
     path: '/AccessDenied',
     name: 'AccessDenied',
     component: AccessDenied
+  },
+  {
+    path: '/addbook',
+    name: 'AddBook',
+    component: AddBookView
+  },
+  {
+    path: '/getBookCount',
+    name: 'GetBookCount',
+    component: GetBookCountView
   }
 ]
 

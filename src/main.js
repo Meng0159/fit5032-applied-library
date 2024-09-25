@@ -10,7 +10,7 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app'
+
 // import { getAuth, connectAuthEmulator } from 'firebase/auth'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -18,21 +18,25 @@ import { initializeApp } from 'firebase/app'
 // if (import.meta.env.MODE === 'development') {
 //   connectAuthEmulator(getAuth(), 'http://localhost:9099'), { disableWarnings: true }
 // }
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: 'AIzaSyAZjapMMiAYw6IEGKyTxqvJ_CB6ArURiLg',
-  authDomain: 'week7-meng.firebaseapp.com',
-  projectId: 'week7-meng',
-  storageBucket: 'week7-meng.appspot.com',
-  messagingSenderId: '131447863877',
-  appId: '1:131447863877:web:883ec606ea99cca955812c'
-}
-
-// Initialize Firebase
-initializeApp(firebaseConfig)
 
 const app = createApp(App)
 app.use(PrimeVue, { theme: { preset: Aura } })
 app.use(router)
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: 'AIzaSyB3-TZCfRsv2wmwRIblq6HMoOkqFfsH7ck',
+  authDomain: 'week7-8-meng.firebaseapp.com',
+  projectId: 'week7-8-meng',
+  storageBucket: 'week7-8-meng.appspot.com',
+  messagingSenderId: '664170138434',
+  appId: '1:664170138434:web:196bb735bab1456e1496db'
+}
+
+// Initialize Firebase
+initializeApp(firebaseConfig)
 app.mount('#app')
