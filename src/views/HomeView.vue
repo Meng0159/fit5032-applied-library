@@ -1,7 +1,4 @@
 <template>
-  <header>
-    <BHeader />
-  </header>
   <Toast />
   <div v-if="isAuthenticated == true">
     <div class="welcome-section">
@@ -26,7 +23,7 @@
 <script setup>
 import Welcome from '@/components/Welcome.vue'
 import LibraryRegistrationForm from '@/components/LibraryForm.vue'
-import BHeader from '@/components/BHeader.vue'
+
 import FirebaseSigninView from './FirebaseSigninView.vue'
 import { ref, onMounted } from 'vue'
 import { getAuth } from 'firebase/auth'

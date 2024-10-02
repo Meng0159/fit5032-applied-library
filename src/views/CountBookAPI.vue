@@ -1,27 +1,29 @@
 <template>
-  <div id="app">
-    <a href="/">Back to home</a>
-    <h1>Book Counter</h1>
-    <button @click="getBookCount">Get Book Count</button>
-    <p v-if="count !== null">Total number of books: {{ count }}</p>
-    <p v-if="error">{{ error }}</p>
-  </div>
+  <!-- <h1>Book Count</h1>
+    <p v-if="loading">Loading...</p>
+    <p v-else>{{ bookCount }}</p> -->
+  <a href="/">Back to home</a>
+  <pre>{{ jsondata }}</pre>
 </template>
 
 <script>
 import axios from 'axios'
+
 export default {
   data() {
     return {
-      count: null,
-      error: null
+      jsondata: null,
+      error: true
     }
   },
+  created() {
+    this.getBookCountAPI()
+  },
   methods: {
-    async getBookCount() {
+    async getBookCountAPI() {
       try {
         const response = await axios.get('https://countbooks-esypciyr4q-uc.a.run.app')
-        this.count = response.data.count
+        this.jsondata = response.data
         this.error = null
       } catch (error) {
         console.error('Error fetching book count:', error)
@@ -32,3 +34,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* Add your styles here */
+</style>

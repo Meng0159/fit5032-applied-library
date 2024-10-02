@@ -37,7 +37,6 @@ import { ref, onMounted } from 'vue'
 import db from '../firebase/init.js'
 import {
   collection,
-  addDoc,
   getDocs,
   deleteDoc,
   updateDoc,
@@ -61,10 +60,28 @@ const addBook = async () => {
       alert('ISBN must be a valid number')
       return
     }
-    await addDoc(collection(db, 'books'), {
-      isbn: isbnNumber,
-      name: name.value
+    // await addDoc(collection(db, 'books'), {
+    //   isbn: isbnNumber,
+    //   name: name.value
+    // })
+    // Call the cloud function instead of directly adding to Firestore
+    const response = await fetch('https://addbook-esypciyr4q-uc.a.run.app', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        isbn: isbnNumber,
+        name: name.value
+      })
     })
+
+    if (!response.ok) {
+      throw new Error('Failed to add book')
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    const result = await response.json()
     isbn.value = ''
     name.value = ''
     alert('Book added successfully!')
