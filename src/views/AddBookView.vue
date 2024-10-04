@@ -100,7 +100,11 @@ const fetchBooks = async () => {
       limit(5)
     ) // Limit: to 10 results)
     const querySnapshot = await getDocs(q)
-    books.value = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+    const booksArray = []
+    querySnapshot.forEach((doc) => {
+      booksArray.push({ id: doc.id, ...doc.data() })
+    })
+    books.value = booksArray
   } catch (error) {
     console.error('Error fetching books: ', error)
   }
