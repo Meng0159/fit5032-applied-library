@@ -1,53 +1,41 @@
-<script setup>
-// eslint-disable-next-line no-unused-vars
-import welcomeSection from './components/welcomeSection.vue'
-// eslint-disable-next-line no-unused-vars
-import TheWelcome from './components/TheWelcome.vue'
+<!-- <script setup>
 // import JSON from './components/JSON.vue'
-import Form from './components/Form.vue'
+// import RegistrationForm from './components/LibraryRegistrationForm.vue'
 </script>
 
 <template>
-  <!-- <JSON></JSON> -->
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <welcomeSection msg="You did it!" username="Eloi" />
-    </div>
-  </header>
-
-  <main>
-    <JSON />
-  </main> -->
-  <Form />
+    <router-view></router-view>
+  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style scoped></style> -->
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+<template>
+  <div class="main-container">
+    <header v-if="showHeader">
+      <BHeader />
+    </header>
+    <main class="main-box">
+      <router-view></router-view>
+    </main>
+  </div>
+</template>
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+<script>
+import BHeader from './components/BHeader.vue'
+import CountBookAPI from './views/CountBookAPI.vue'
+
+export default {
+  name: 'App',
+  components: {
+    BHeader,
+    // eslint-disable-next-line vue/no-unused-components
+    CountBookAPI
+  },
+  computed: {
+    showHeader() {
+      return this.$route.name !== 'CountBookAPI'
+    }
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
-</style>
+</script>
