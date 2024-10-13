@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - week9-10 # Changed from 'main' to 'week9-10'
+      - week9-10
 
 jobs:
   build-and-deploy:
@@ -12,16 +12,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: Meng0159/fit5032-applied-library # Added repository
-          ref: week9-10 # Added ref to specify the branch
+          repository: Meng0159/fit5032-applied-library
+          ref: week9-10
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16' # Updated to a more recent version
+
+      - name: Debug - List directory contents
+        run: ls -la
+
+      - name: Debug - Display package.json contents
+        run: cat package.json
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm install
+          npm ls
 
       - name: Build
         run: npm run build
