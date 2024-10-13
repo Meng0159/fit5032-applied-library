@@ -3,15 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - week9-10
+      - week9-10 # Changed from 'main' to 'week9-10'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          repository: Meng0159/fit5032-applied-library # Added repository
+          ref: week9-10 # Added ref to specify the branch
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
