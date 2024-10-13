@@ -31,7 +31,6 @@
 </template>
 
 <script>
-// The info section in 10.1.1 provided detailed information about this package
 import axios from 'axios'
 
 const apikey = '54e9349a114f977acb490677c487408b'
@@ -46,23 +45,15 @@ export default {
       dailyForecast: []
     }
   },
-  //computed is a property that is used to define a property that
-  //is dependent on other data properties.
-  //If we using a more easy to understand words to understand the concept:
-  //the derived value such as temperature automatically update when the relevant value change.
-  computed: {
-    //There are multiple way to obtain the data in Celsius format.
-    //Calculation by yourself like below after data is retireved or via API parameters
 
-    //Example of adding additional units requirement, if you choose this, remember to change section 3.1
-    //https://api.openweathermap.org/data/2.5/weather?lat=XXX&lon=-XXX.15&appid={API key}&units=metric
+  computed: {
     temperature() {
       return this.weatherData ? Math.floor(this.weatherData.main.temp - 273) : null
     },
     //Get the current weather icon using the API link
     iconUrl() {
       return this.weatherData
-        ? `http://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
+        ? `https://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
         : null
     }
   },
@@ -82,7 +73,7 @@ export default {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const { latitude, longitude } = position.coords
           //API link to obtain the current weather based on the current location browser identified
-          const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}`
+          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}`
           //await means wait for the fetchWeatherData method to complete before proceeding
           await this.fetchWeatherData(url)
         })
@@ -105,7 +96,7 @@ export default {
       }
 
       try {
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(this.city)}&appid=${apikey}`
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(this.city)}&appid=${apikey}`
         await this.fetchWeatherData(url)
 
         // Clear the search input after successful search
