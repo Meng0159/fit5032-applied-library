@@ -10,16 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: Meng0159/fit5032-applied-library
           ref: week9-10
-          token: ${{ secrets.PAT }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16' # Updated to a more recent version
+          node-version: '20' # Updated to a more recent version
 
       - name: Debug - List directory contents
         run: ls -la
@@ -28,9 +27,7 @@ jobs:
         run: cat package.json
 
       - name: Install dependencies
-        run: |
-          npm install
-          npm ls
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -40,4 +37,6 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-          token: ${{ secrets.PAT }}
+
+permissions:
+  contents: write
