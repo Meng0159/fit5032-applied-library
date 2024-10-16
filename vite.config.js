@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/<repository-name>/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/fit5032-applied-library/' : '/',
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
