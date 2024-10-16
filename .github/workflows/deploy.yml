@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          repository: Meng0159/fit5032-applied-library
-          ref: week9-10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
